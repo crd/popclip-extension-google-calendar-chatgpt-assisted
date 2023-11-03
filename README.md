@@ -20,8 +20,6 @@ To install the ChatGPT Google Calendar Event extension:
 2. Right-click and select "Install Extension" from the PopClip menu.
    - Alternatively, save the `.popclipext` file to your system and double-click the file. PopClip will prompt you to install the extension.
 
-Refer to the [PopClip Extensions Developer Reference](https://www.popclip.app/dev/) for detailed instructions on installing and testing PopClip extensions.
-
 ## Configuration
 
 Before using the extension you must obtain an API key from OpenAI. Here's how:
