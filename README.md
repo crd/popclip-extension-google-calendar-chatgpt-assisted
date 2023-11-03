@@ -1,6 +1,6 @@
 # ChatGPT Google Calendar Event Extension for PopClip
 
-This README provides developers and advanced users with the information needed to install, configure, and use the ChatGPT Google Calendar Event extension for PopClip. This extension allows users to create Google Calendar events from text selected on their Mac by using the OpenAI ChatGPT API to extract event details and generate a calendar URL.
+This extension allows users to create Google Calendar events from text selected on their Mac by using the OpenAI ChatGPT API to extract event details and generate a calendar URL. [PopClip](https://www.popclip.app/) is a highly-extensible productivity tool for the Mac that allows the user to perform customizable actions based on selected text.
 
 ## Table of Contents
 
