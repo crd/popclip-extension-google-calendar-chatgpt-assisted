@@ -1,10 +1,9 @@
 // #popclip extension for Google Calendar Event (ChatGPT-assisted)
 // name: Google Calendar Event (ChatGPT-assisted)
-// creator: Cory Donnelly
 // icon: symbol:calendar
 // language: typescript
 // module: true
-// xpopclipVersion: 1004226
+// popclipVersion: 4226
 // entitlements: [network]
 // options: [{
 //   identifier: apikey, 
@@ -14,8 +13,6 @@
 // }]
 
 /**
- * #popclip extension for ChatGPT Google Calendar Event
- * 
  * This PopClip extension uses the OpenAI ChatGPT API to extract event details from selected text
  * and create a Google Calendar event URL which can then be opened in the default browser.
  */
@@ -43,7 +40,7 @@ interface IEventDetails {
 const API_BASE_URL: string = "https://api.openai.com/v1";
 const API_MODEL: string = "gpt-3.5-turbo";
 const GOOGLE_CALENDAR_BASE_URL: string = "https://calendar.google.com/calendar/render?action=TEMPLATE";
-const CHATGPT_INSTRUCTION_TEMPLATE: string = `Extract event details from the text: name, start/end times, location, and description. Return a JSON with keys: 'eventName', 'dates.start', 'dates.end', 'details', 'location'. Use the 'YYYY-MM-DDTHH:mm:ss' format for dates. Assume the current date is {formattedDate}.`;
+const CHATGPT_INSTRUCTION_TEMPLATE: string = `Analyze the text to extract event details such as the event name, start and end times, details, and location. Format this information in a JSON object with keys: 'eventName', 'dates.start', 'dates.end', 'details', and 'location', using 'YYYY-MM-DDTHH:mm:ss' for date formats. If no specific date is mentioned, use today's date, which is {formattedDate}. Interpret relative dates like 'tomorrow' based on this date. For unspecified durations, default to one hour. If a partial date like 'Tuesday' is mentioned, assume it as the next occurrence of that day from today.`;
 
 const messages: Array<{ role: string; content: string }> = []; // History of previous messages
 
