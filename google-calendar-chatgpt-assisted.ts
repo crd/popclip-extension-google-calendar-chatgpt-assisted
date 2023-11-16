@@ -63,7 +63,24 @@ function convertToZuluTime(dateString: string): string {
 }
 
 /**
- * Generates a Google Calendar event URL based on the input text using ChatGPT.
+ * Generates a Google Calendar URL based on the event details.
+ * 
+ * @param {IEventDetails} eventDetails - Extracted event details.
+ * @returns {string} - The Google Calendar URL.
+ */
+function buildGoogleCalendarURL(eventDetails: IEventDetails): string {
+    const eventName = eventDetails.eventName ? `&text=${encodeURIComponent(eventDetails.eventName)}` : '';
+    const startDate = convertToZuluTime(eventDetails.dates?.start || "");
+    const endDate = convertToZuluTime(eventDetails.dates?.end || "");
+    const dateParam = startDate && endDate ? `&dates=${startDate}/${endDate}` : '';
+    const details = eventDetails.details ? `&details=${encodeURIComponent(eventDetails.details)}` : '';
+    const location = eventDetails.location ? `&location=${encodeURIComponent(eventDetails.location)}` : '';
+
+    return GOOGLE_CALENDAR_BASE_URL + eventName + dateParam + details + location;
+}
+
+/**
+ * Uses ChatGPT to generate a Google Calendar URL based on the input text.
  * 
  * @param {IGenerateCalendarURLInput} input - The input text selected by the user.
  * @param {IOptions} options - Options containing the API key.
@@ -91,17 +108,8 @@ async function generateCalendarURL(input: IGenerateCalendarURLInput, options: IO
         // Handle the API response
         messages.push(data.choices[0].message);
         const parsedResponse: IEventDetails = JSON.parse(data.choices[0].message.content);
+        const calendarURL = buildGoogleCalendarURL(parsedResponse);
 
-        // Construct URL components
-        const eventName = parsedResponse.eventName ? `&text=${encodeURIComponent(parsedResponse.eventName)}` : '';
-        const startDate = convertToZuluTime(parsedResponse.dates?.start || "");
-        const endDate = convertToZuluTime(parsedResponse.dates?.end || "");
-        const dateParam = startDate && endDate ? `&dates=${startDate}/${endDate}` : '';
-        const details = parsedResponse.details ? `&details=${encodeURIComponent(parsedResponse.details)}` : '';
-        const location = parsedResponse.location ? `&location=${encodeURIComponent(parsedResponse.location)}` : '';
-
-        // Build the full URL
-        const calendarURL = GOOGLE_CALENDAR_BASE_URL + eventName + dateParam + details + location;
         print(`Generated Calendar URL: ${calendarURL}`);
         popclip.openUrl(calendarURL);
         return calendarURL;
@@ -119,7 +127,7 @@ async function generateCalendarURL(input: IGenerateCalendarURLInput, options: IO
 }
 
 // Exports the PopClip action
-exports.actions = [{
+export const actions = [{
     title: "Generate Google Calendar URL",
     code: generateCalendarURL,
 }];
