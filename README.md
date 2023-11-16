@@ -16,9 +16,9 @@ This extension allows users to create Google Calendar events from text selected 
 
 To install the ChatGPT Google Calendar Event extension:
 
-1. Highlight the entire extension snippet code.
-2. Right-click and select "Install Extension" from the PopClip menu.
-   - Alternatively, save the `.popclipext` file to your system and double-click the file. PopClip will prompt you to install the extension.
+1. Download and rename the [google-calendar-chatgpt-assisted.ts](google-calendar-chatgpt-assisted.ts) file to have the extension `.popcliptxt`
+2. Open the file via the Finder or from the commandline
+3. Select 'Install "Google Calendar Event (ChatGPT-assisted)"' when prompted.
 
 ## Configuration
 
@@ -27,7 +27,7 @@ Before using the extension you must obtain an API key from OpenAI. Here's how:
 1. Visit [OpenAI API](https://platform.openai.com/signup) and sign up to receive an API key.
 2. After obtaining the key, access the PopClip extension's preferences by clicking on the PopClip menu bar item, selecting the extension, and then entering the API key in the provided field.
 
-Note: This extension uses the ChatGPT API, which is independent of the web user interface version of ChatGPT.
+Note: This extension uses the ChatGPT API, which is independent of the web user interface version of ChatGPT and billing is handled separately.
 
 ## Usage
 
@@ -39,7 +39,7 @@ To use the ChatGPT Google Calendar Event extension:
 
 ## Development
 
-This extension is written in TypeScript, making the code more robust and maintainable. PopClip provides certain dependencies like `axios` in its environment, so no additional installation is needed beyond the extension itself.
+PopClip provides certain dependencies like `axios` in its environment, so no additional installation is needed beyond the extension itself.
 
 For additional details on developing for PopClip, refer to the [PopClip Extensions Developer Reference](https://www.popclip.app/dev/).
 
